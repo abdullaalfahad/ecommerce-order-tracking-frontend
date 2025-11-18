@@ -30,7 +30,6 @@ export function RegisterForm() {
   });
 
   function onSubmit(data: RegisterInput) {
-    // Don't send confirmPassword to the API
     const { confirmPassword, ...submitData } = data;
     register(submitData);
   }
