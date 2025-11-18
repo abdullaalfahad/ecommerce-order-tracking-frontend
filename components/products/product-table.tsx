@@ -14,6 +14,7 @@ import { useAuthToken } from "@/hooks/use-auth-token";
 import { useProducts } from "@/hooks/use-products";
 import AddToCartButton from "../cart/cart-button";
 import { ProductTableActions } from "./product-table-actions";
+import { ProductDialog } from "./product-upsert-dialog";
 
 export default function ProductTable({ limit = 5 }: { limit?: number }) {
   const [page, setPage] = useState(0);
@@ -33,6 +34,12 @@ export default function ProductTable({ limit = 5 }: { limit?: number }) {
 
   return (
     <div className="space-y-4">
+      {payload?.role === "admin" && (
+        <div className="flex justify-end">
+          <ProductDialog triggerButtonText="Add Product" />
+        </div>
+      )}
+
       <div className="overflow-x-auto border rounded-lg">
         <Table className="min-w-[600px]">
           <TableHeader className="bg-gray-100">
@@ -50,13 +57,6 @@ export default function ProductTable({ limit = 5 }: { limit?: number }) {
                 className="hover:bg-gray-50 transition-colors"
               >
                 <TableCell className="flex items-center gap-3 px-4 py-2">
-                  {/* <Image
-                    src={p?.images[0]}
-                    alt={p?.name}
-                    width={50}
-                    height={50}
-                    className="w-12 h-12 object-cover rounded-md border"
-                  /> */}
                   <span>{p.name}</span>
                 </TableCell>
                 <TableCell className="text-center px-4 py-2">

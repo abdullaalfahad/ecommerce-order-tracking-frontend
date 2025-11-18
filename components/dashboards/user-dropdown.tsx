@@ -1,14 +1,8 @@
 "use client";
 
 import { deleteCookie } from "cookies-next";
-import {
-  ArrowDownIcon,
-  ChevronsUpDown,
-  LogOut,
-  ShoppingBag,
-  User,
-} from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ChevronsUpDown, LogOut, ShoppingBag } from "lucide-react";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,8 +18,8 @@ export function UserDropdown() {
   const { payload } = useAuthToken();
 
   const logout = () => {
-    deleteCookie("accessToken"); // 🔥 proper delete
-    localStorage.removeItem("token"); // (optional) JWT storage cleanup
+    deleteCookie("accessToken");
+    localStorage.removeItem("token");
     window.location.href = "/login";
   };
 

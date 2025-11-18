@@ -5,7 +5,7 @@ export default function Dahboard() {
     <div>
       <h1 className="text-3xl font-semibold mb-4">Dashboard</h1>
 
-      <ProductTable />
+      <ProductTable limit={10} />
     </div>
   );
 }
