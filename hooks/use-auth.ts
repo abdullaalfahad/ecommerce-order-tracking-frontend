@@ -9,6 +9,12 @@ interface LoginData {
   password: string;
 }
 
+interface RegisterData {
+  name: string;
+  email: string;
+  password: string;
+}
+
 interface AuthResponse {
   token: string;
   user?: {
@@ -34,6 +40,26 @@ export function useLogin() {
     },
     onError: (error: any) => {
       toast.error(error.response?.data?.message || "Invalid credentials");
+    },
+  });
+}
+
+export function useRegister() {
+  const router = useRouter();
+
+  return useMutation({
+    mutationFn: async (data: RegisterData) => {
+      const response = await api.post<AuthResponse>("/auth/register", data);
+      return response.data;
+    },
+    onSuccess: (data) => {
+        setCookie("accessToken", data.token);
+      toast.success("Account created successfully!");
+      router.push("/dashboard");
+      router.refresh();
+    },
+    onError: (error: any) => {
+      toast.error(error.response?.data?.message || "Something went wrong");
     },
   });
 }
