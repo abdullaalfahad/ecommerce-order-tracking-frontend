@@ -13,7 +13,7 @@ import { useCart } from "@/hooks/use-cart";
 import CartItem from "./cart-item";
 
 export default function CartDrawer() {
-  const { cart, isCartLoading } = useCart();
+  const { cart, isCartLoading, clearCart } = useCart();
 
   return (
     <Sheet>
@@ -34,10 +34,24 @@ export default function CartDrawer() {
           ))}
         </div>
 
-        <div className="mt-6 flex justify-between">
-          <p className="font-semibold text-lg">Total: ${cart?.total}</p>
+        {cart?.items?.length > 0 && (
+          <div className="mt-4 flex justify-end">
+            <Button
+              variant="destructive"
+              size="sm"
+              onClick={() => clearCart.mutate()}
+            >
+              Clear Cart
+            </Button>
+          </div>
+        )}
+
+        <div className="mt-6 flex justify-between items-center">
+          <p className="font-semibold text-lg">
+            Total: ${cart?.total?.toFixed(2)}
+          </p>
           <Link href="/cart">
-            <Button>Checkout</Button>
+            <Button disabled={cart?.items?.length === 0}>Checkout</Button>
           </Link>
         </div>
       </SheetContent>

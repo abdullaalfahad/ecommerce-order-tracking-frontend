@@ -27,15 +27,6 @@ export default function CartItem({ item }: { item: any }) {
           }
           className="w-16"
         />
-
-        <Button
-          variant="destructive"
-          onClick={() =>
-            updateItem.mutate({ productId: item.product._id, quantity: 0 })
-          }
-        >
-          Remove
-        </Button>
       </div>
     </div>
   );
