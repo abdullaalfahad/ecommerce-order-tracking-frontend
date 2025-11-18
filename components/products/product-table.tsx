@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,12 +10,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useAuthToken } from "@/hooks/use-auth-token";
 import { useProducts } from "@/hooks/use-products";
 import AddToCartButton from "../cart/cart-button";
+import { ProductTableActions } from "./product-table-actions";
 
 export default function ProductTable() {
   const [page, setPage] = useState(0);
   const limit = 5; // items per page
+
+  const { payload } = useAuthToken();
   const { data, isLoading } = useProducts({ page, limit });
 
   if (isLoading)
@@ -64,7 +67,11 @@ export default function ProductTable() {
                   {p.stock}
                 </TableCell>
                 <TableCell className="text-center px-4 py-2">
-                  <AddToCartButton productId={p._id} />
+                  {payload?.role === "admin" ? (
+                    <ProductTableActions productId={p._id} />
+                  ) : (
+                    <AddToCartButton productId={p._id} />
+                  )}
                 </TableCell>
               </TableRow>
             ))}

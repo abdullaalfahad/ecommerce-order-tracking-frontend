@@ -30,7 +30,7 @@ export default function CartDrawer() {
 
         <div className="space-y-4 mt-4">
           {cart?.items?.map((item: any) => (
-            <CartItem key={item.product._id} item={item} />
+            <CartItem key={item?.product?._id} item={item} />
           ))}
         </div>
 
