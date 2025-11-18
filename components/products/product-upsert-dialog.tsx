@@ -3,12 +3,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import { getCookie } from "cookies-next";
+import { Edit } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import xior from "xior";
 import { z } from "zod";
-
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -134,9 +134,21 @@ export const ProductDialog: React.FC<ProductDialogProps> = ({
     }
   };
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog
+      open={open}
+      onOpenChange={(value) => {
+        if (value === false) {
+          form.reset();
+          setPreview(null);
+          setImageUrl(null);
+        }
+        setOpen(value);
+      }}
+    >
       <DialogTrigger asChild>
-        <Button>{triggerButtonText}</Button>
+        <Button>
+          {triggerButtonText === "Edit Product" ? <Edit /> : triggerButtonText}
+        </Button>
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-lg overflow-y-auto">

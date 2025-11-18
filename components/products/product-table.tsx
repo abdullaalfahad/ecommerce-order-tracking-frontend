@@ -67,7 +67,7 @@ export default function ProductTable({ limit = 5 }: { limit?: number }) {
                 </TableCell>
                 <TableCell className="text-center px-4 py-2">
                   {payload?.role === "admin" ? (
-                    <ProductTableActions productId={p._id} />
+                    <ProductTableActions product={p} />
                   ) : (
                     <AddToCartButton productId={p._id} />
                   )}
