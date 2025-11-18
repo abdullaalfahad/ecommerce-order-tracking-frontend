@@ -2,7 +2,7 @@ import { getCookie } from "cookies-next";
 import xior from "xior";
 
 const api = xior.create({
-  baseURL: "http://localhost:4000/api",
+  baseURL: "https://ecommerce-order-tracking-backend-1.onrender.com/api",
   headers: {
     "Content-Type": "application/json",
   },
