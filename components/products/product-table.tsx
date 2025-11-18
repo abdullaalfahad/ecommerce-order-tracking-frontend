@@ -15,9 +15,8 @@ import { useProducts } from "@/hooks/use-products";
 import AddToCartButton from "../cart/cart-button";
 import { ProductTableActions } from "./product-table-actions";
 
-export default function ProductTable() {
+export default function ProductTable({ limit = 5 }: { limit?: number }) {
   const [page, setPage] = useState(0);
-  const limit = 5; // items per page
 
   const { payload } = useAuthToken();
   const { data, isLoading } = useProducts({ page, limit });
