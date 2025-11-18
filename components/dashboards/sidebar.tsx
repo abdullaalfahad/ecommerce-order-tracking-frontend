@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, Menu, Package, ShoppingBag, ShoppingCart } from "lucide-react";
+import { Home, Menu, Package, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
@@ -10,7 +10,6 @@ const Sidebar = () => {
     { href: "/dashboard", label: "Overview", icon: Home },
     { href: "/orders", label: "Orders", icon: ShoppingBag },
     { href: "/products", label: "Products", icon: Package },
-    { href: "/cart", label: "Cart", icon: ShoppingCart },
   ];
 
   const SidebarContent = () => (
