@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -10,10 +9,17 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useCart } from "@/hooks/use-cart";
+import api from "@/lib/xior";
 import CartItem from "./cart-item";
 
 export default function CartDrawer() {
   const { cart, isCartLoading, clearCart } = useCart();
+
+  const handleCheckout = async () => {
+    await api.post("/orders/create");
+
+    window.location.href = "/checkout";
+  };
 
   return (
     <Sheet>
@@ -50,9 +56,10 @@ export default function CartDrawer() {
           <p className="font-semibold text-lg">
             Total: ${cart?.total?.toFixed(2)}
           </p>
-          <Link href="/cart">
-            <Button disabled={cart?.items?.length === 0}>Checkout</Button>
-          </Link>
+
+          <Button disabled={cart?.items?.length === 0} onClick={handleCheckout}>
+            Checkout
+          </Button>
         </div>
       </SheetContent>
     </Sheet>
